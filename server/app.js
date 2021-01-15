@@ -17,11 +17,14 @@ mongoose.connect(mongoUri, {
 mongoose.connection.on('connected', () => {
     console.log('connected to Database')
 })
-
 //On error console log
 mongoose.connection.on('error', (err) => {
     console.log('error on Database', err)
 })
+
+//making models to be required
+require('./models/user')
+require('./models/post')
 
 
 //Parse to json middleware
@@ -29,6 +32,9 @@ app.use(express.json())
 
 //Auth routes
 app.use(require('./routes/auth'))
+
+//routes for posts
+app.use(require('./routes/post'))
 
 
 app.listen(port, () => {
