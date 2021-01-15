@@ -7,14 +7,6 @@ const port=2000
 //User model
 require('./models/user')
 
-
-//Parse to json middleware
-app.use(express.json())
-
-//Auth routes
-app.use(require('./routes/auth'))
-
-
 //Connect to DB
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
@@ -30,6 +22,14 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.log('error on Database', err)
 })
+
+
+//Parse to json middleware
+app.use(express.json())
+
+//Auth routes
+app.use(require('./routes/auth'))
+
 
 app.listen(port, () => {
     console.log('server is running', port)
