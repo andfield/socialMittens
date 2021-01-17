@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import SignUP from './pages/SignUp'
 import Login from './pages/Login'
+import CreatePost from './pages/CreatePost'
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
       <Route path="/profile" component={Profile}></Route>
       <Route path="/signup" component={SignUP}></Route>
       <Route path="/login" component={Login}></Route>
+      <Route path="/create" component={CreatePost}></Route>
     </BrowserRouter>
   )
 }
