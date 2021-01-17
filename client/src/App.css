@@ -34,3 +34,15 @@ a{
 .gallery-item{
   width: 30%;
 }
+
+/* Styles for home page parent div */
+.home{
+  
+}
+
+/* Styles for Home page card */
+.home-card{
+  max-width: 500px;
+  height: max-content;
+  margin: 26px auto;
+}
