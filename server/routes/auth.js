@@ -17,13 +17,13 @@ router.get('/protected',requireLogin, (req,res) => {
 router.post('/signup', (req, res) => {
     const {name, email, password}=req.body
     if (!name||!password||!email) {
-        return res.status(422).json({message: "Please enter all the fields"})
+        return res.status(422).json({error: "Please enter all the fields"})
     }
     //check if user already exists with the email
     User.findOne({email: email})
         .then((savedUser) => {
             if (savedUser) {
-                return res.status(422).json({message: `User already exists with email: ${email}`})
+                return res.status(422).json({error: `User already exists with email: ${email}`})
             }
             //Hash password using bcrypt once sucessfull store the new user with hashed password
             bcrypt.hash(password, 13)

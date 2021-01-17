@@ -46,3 +46,11 @@ a{
   height: max-content;
   margin: 26px auto;
 }
+
+/* Toast message styles */
+#toast-container{
+  top:100px !important;
+  right: 40px !important;
+  left: auto !important;
+  
+}
