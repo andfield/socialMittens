@@ -9,8 +9,8 @@ const requireLogin = require('../middleware/requireLogin')
 
 //Create new post route
 router.post('/createpost', requireLogin, (req,res) => {
-    const {title, body} = req.body
-    if(!title || !body) {
+    const {title, body,imgUrl} = req.body
+    if(!title || !body || imgUrl) {
         return res.status(422).json({error: "Please provide all the fields"})
     }
     //Make password invisible on post
@@ -20,6 +20,7 @@ router.post('/createpost', requireLogin, (req,res) => {
     const post = new Post({
         title,
         body,
+        imgUrl,
         postedBy: req.user
 
     })
