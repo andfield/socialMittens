@@ -34,6 +34,13 @@ const Login=() => {
                     M.toast({html: data.error, classes: "#d32f2f red lighten-2"})
                 }
                 else {
+                    console.log(data)
+                    //save the token passed by server to local storage
+                    localStorage.setItem("jwt", data.token)
+
+                    //Save the user data to local storage
+                    localStorage.setItem("user", JSON.stringify(data.user))
+
                     M.toast({html: "Signed in Sucessfully", classes: "#BAF2BB green lighten-2"})
                     //once the user has signed up take him to Login screen
                     history.push('/')
