@@ -1,9 +1,12 @@
-import {React, useState} from 'react'
+import {React, useState, useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import M from 'materialize-css'
-
+import {UserContext} from '../App'
 
 const Login=() => {
+
+    //destructure the UserContext and get state and dispatch from it.
+    const{state, dispatch} = useContext(UserContext)
 
     //initiallizing use History
     const history=useHistory()
@@ -40,6 +43,9 @@ const Login=() => {
 
                     //Save the user data to local storage
                     localStorage.setItem("user", JSON.stringify(data.user))
+
+                    //create a action called USER to change the global context state.
+                    dispatch({type: "USER", payload: data.user})
 
                     M.toast({html: "Signed in Sucessfully", classes: "#BAF2BB green lighten-2"})
                     //once the user has signed up take him to Login screen
