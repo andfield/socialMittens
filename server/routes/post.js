@@ -35,7 +35,7 @@ router.post('/createpost', requireLogin, (req,res) => {
 })
 
 //Get all posts
-router.get('/allpost', (req,res) => {
+router.get('/allpost', requireLogin, (req,res) => {
     //find all the posts
     Post.find()
     //Populate the postedBy with user name and Id.
