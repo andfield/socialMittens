@@ -6,8 +6,11 @@ export const initialState=null
 export const reducer = (state, action) => {
 
     //if action is USER then return the changed state (action.payload)
-    if(action.type == "USER"){
+    if(action.type === "USER"){
         return action.payload
+    }
+    if(action.type === "LOGOUT"){
+        return null
     }
     //else return the original state.
     return state

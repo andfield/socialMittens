@@ -51,7 +51,7 @@ const SignUp=() => {
                 <h4>Social Mittens</h4>
                 <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
                 <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input type="text" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
                 <button class="btn waves-effect waves-light #F2BAC9 pink lighten-3" onClick={() => PostData()} >Sign Up
                 </button>
                 <h5>
