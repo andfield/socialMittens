@@ -27,12 +27,15 @@ const AppRouting=() => {
     //get user from local storage
     const user=JSON.parse(localStorage.getItem("user"))
 
-    //create a action called USER to change the global context state.
-    dispatch({type: "USER", payload: user})
 
-    //if user is available in local storage redirect to home else to login
+
+    //if user is available in local storage save him to context else to login
     if (user) {
-      history.push('/')
+
+      //create a action called USER to change the global context state.
+      dispatch({type: "USER", payload: user})
+
+      // history.push('/')
     }
     else {
       history.push('/login')
