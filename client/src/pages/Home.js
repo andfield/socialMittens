@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react'
-
+import React, {useState, useEffect, useContext} from 'react'
+import {UserContext} from '../App'
 
 const Home=() => {
 
     //Post state
     const [posts, setPosts]=useState([])
+
+    //Using context to get user
+    const {state, dispatch}=useContext(UserContext)
 
     //On mount get posts from server
     useEffect(() => {
@@ -40,7 +43,19 @@ const Home=() => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                //if the ids match then return new data else return the old one
+                const newPosts=posts.map(item => {
+                    if (item._id==data._id) {
+                        return data
+                    }
+                    else {
+                        return item
+                    }
+                })
+                setPosts(newPosts)
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -55,12 +70,24 @@ const Home=() => {
                 "Authorization": "Bearer "+localStorage.getItem('jwt')
             },
             body: JSON.stringify({
-                id:id
+                id: id
             })
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                //if the ids match then return new data else return the old one
+                const newPosts=posts.map(item => {
+                    if (item._id==data._id) {
+                        return data
+                    }
+                    else {
+                        return item
+                    }
+                })
+                setPosts(newPosts)
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -78,8 +105,15 @@ const Home=() => {
                             </div>
                             {/* Card contents */}
                             <div className="card-content">
-                                <i className="material-icons" style={{color: 'blue'}} onClick={() => {likePost(post._id)}} >thumb_up</i>
-                                <i className="material-icons" style={{marginLeft: '10px', color: 'red'}} onClick={() => {unlikePost(post._id)}} >thumb_down</i>
+
+                                {/* Allow current user to only like a post once */}
+                                {
+                                    post.likes.includes(state._id)?
+                                        <i className="material-icons" style={{color: 'red'}} onClick={() => {unlikePost(post._id)}} >thumb_down</i>
+                                        :
+                                        <i className="material-icons" style={{color: 'blue'}} onClick={() => {likePost(post._id)}} >thumb_up</i>
+                                }
+
                                 <h6>{post.likes.length} Likes</h6>
                                 <h6>{post.title}</h6>
                                 <p>{post.body}</p>
