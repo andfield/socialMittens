@@ -40,6 +40,7 @@ router.get('/allpost', requireLogin, (req, res) => {
     Post.find()
         //Populate the postedBy with user name and Id.
         .populate("postedBy", '_id name')
+        .populate("comments.postedBy", "_id name")
         .then(posts => {
             return res.json({posts})
         })
@@ -124,6 +125,7 @@ router.put('/comment', requireLogin, (req, res) => {
     })
         //Populate to get more data about the user.
         .populate("comments.postedBy", "_id name")
+        .populate("postedBy", "_id name")
 
         //execute the query
         .exec((error, result) => {
