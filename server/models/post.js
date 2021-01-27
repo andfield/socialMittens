@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose=require('mongoose')
 
 //imoprting ObjectID from mongoose data type
-const {ObjectId} = mongoose.Schema.Types
+const {ObjectId}=mongoose.Schema.Types
 
-const postSchema = new mongoose.Schema({
+const postSchema=new mongoose.Schema({
 
     title: {
         type: String,
@@ -23,6 +23,10 @@ const postSchema = new mongoose.Schema({
             ref: 'User'
         }
     ],
+    comments: [{
+        comment: String,
+        postedBy: {type: ObjectId, ref: 'User'}
+    }],
     postedBy: {
         type: ObjectId,
         ref: 'User'

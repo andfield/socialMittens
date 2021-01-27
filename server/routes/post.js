@@ -73,20 +73,20 @@ router.put('/like', requireLogin, (req, res) => {
         //To get new updated record from mongo
         new: true
     })
-    //execute the query
-    .exec((error, result) => {
-        if(error){
-            return res.status(422).json({error})
-        }
-        else{
-            res.json(result)
-        }
-    })
+        //execute the query
+        .exec((error, result) => {
+            if (error) {
+                return res.status(422).json({error})
+            }
+            else {
+                res.json(result)
+            }
+        })
 })
 
 //unlike a post route
 router.put('/unlike', requireLogin, (req, res) => {
-    
+
     Post.findByIdAndUpdate(req.body.id, {
         //pull the user from likes array
         $pull: {likes: req.user._id}
@@ -94,15 +94,46 @@ router.put('/unlike', requireLogin, (req, res) => {
         //To get new updated record from mongo
         new: true
     })
-    //execute the query
-    .exec((error, result) => {
-        if(error){
-            return res.status(422).json({error})
-        }
-        else{
-            res.json(result)
-        }
+        //execute the query
+        .exec((error, result) => {
+            if (error) {
+                return res.status(422).json({error})
+            }
+            else {
+                res.json(result)
+            }
+        })
+})
+
+//Add a comment to the post
+router.put('/comment', requireLogin, (req, res) => {
+
+    //get the comment from front end
+    const comment= {
+        comment: req.body.comment,
+        postedBy: req.user._id
+    }
+
+    Post.findByIdAndUpdate(req.body.id, {
+        //push into the comments model
+        $push: {comments: comment}
+    }, {
+        //To get new updated record from mongo
+        new: true
+        
     })
+        //Populate to get more data about the user.
+        .populate("comments.postedBy", "_id name")
+
+        //execute the query
+        .exec((error, result) => {
+            if (error) {
+                return res.status(422).json({error})
+            }
+            else {
+                res.json(result)
+            }
+        })
 })
 
 module.exports=router

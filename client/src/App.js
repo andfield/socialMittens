@@ -29,7 +29,7 @@ const AppRouting=() => {
 
 
 
-    //if user is available in local storage save him to context else to login
+    //if user is   in local storage save him to context else to login
     if (user) {
 
       //create a action called USER to change the global context state.
