@@ -36,6 +36,9 @@ app.use(require('./routes/auth'))
 //routes for posts
 app.use(require('./routes/post'))
 
+//routes for users
+app.use(require('./routes/user'))
+
 
 app.listen(port, () => {
     console.log('server is running', port)
