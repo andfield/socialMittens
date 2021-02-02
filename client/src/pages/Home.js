@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {UserContext} from '../App'
 import M from 'materialize-css'
+import {Link} from 'react-router-dom'
 
 const Home=() => {
 
@@ -174,7 +175,7 @@ const Home=() => {
                 posts.map(post => {
                     return (
                         <div className="card home-card" key={post._id}>
-                            <h5>{post.postedBy.name}
+                            <h5><Link to={post.postedBy._id==state._id?`/profile/${post.postedBy._id}`:'/profile'}>{post.postedBy.name} </Link>
                                 {
                                     //expression to check weather the id of current user matches the post id.
                                     post.postedBy._id==state._id

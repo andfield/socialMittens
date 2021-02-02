@@ -6,7 +6,7 @@ const User = mongoose.model("User")
 const requireLogin=require('../middleware/requireLogin')
 
 //see profile of a user.
-router.get('/user/:id', (req, res) => {
+router.get('/user/:id',requireLogin, (req, res) => {
 
     User.findOne({_id: req.params.id})
     .select("-password")

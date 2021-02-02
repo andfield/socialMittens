@@ -7,6 +7,7 @@ import Profile from './pages/Profile'
 import SignUP from './pages/SignUp'
 import Login from './pages/Login'
 import CreatePost from './pages/CreatePost'
+import OtherUserProfile from './pages/OtherUserProfile'
 import {reducer, initialState} from './reducers/userReducer'
 
 
@@ -46,10 +47,11 @@ const AppRouting=() => {
   return (
     <Switch>
       <Route path="/" exact component={Home}></Route>
-      <Route path="/profile" component={Profile}></Route>
+      <Route path="/profile" exact component={Profile}></Route>
       <Route path="/signup" component={SignUP}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/create" component={CreatePost}></Route>
+      <Route path="/profile/:userId" component={OtherUserProfile}></Route>
     </Switch>
   )
 }
