@@ -26,7 +26,7 @@ const Home=() => {
             .catch(error => {
                 console.log(error)
             })
-    }, [])
+    }, [posts])
 
     //Create a function to like a post.
     const likePost=(id) => {
@@ -132,11 +132,39 @@ const Home=() => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
-                const newData =  posts.filter(post => {
-                    return post._id !=  result._id
+                const newData=posts.filter(post => {
+                    if(post._id == result._id){
+                        return result
+                    }
+                    else{
+                        return post
+                    }
                 })
                 setPosts(newData)
             })
+    }
+
+    //Create a function to delete a comment.
+    const deleteComment=(postId, commentId) => {
+        fetch(`deleteComment/${postId}/${commentId}`, {
+            method: "delete",
+            headers: {
+                Authorization: "Bearer "+ localStorage.getItem("jwt")
+            }
+        })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result)
+            const newData = posts.filter(post => {
+                if(post._id === result._id){
+                    return result
+                }
+                else{
+                    return post
+                }
+            })
+            setPosts(newData)
+        })
     }
 
     return (
@@ -148,13 +176,13 @@ const Home=() => {
                         <div className="card home-card" key={post._id}>
                             <h5>{post.postedBy.name}
                                 {
-                                //expression to check weather the id of current user matches the post id.
-                                post.postedBy._id == state._id 
+                                    //expression to check weather the id of current user matches the post id.
+                                    post.postedBy._id==state._id
                                     &&
-                                   <i className="material-icons" style={{float: "right"}}
-                                    onClick={() => deletePost(post._id)}
-                                   >
-                                    delete</i>
+                                    <i className="material-icons" style={{float: "right"}}
+                                        onClick={() => deletePost(post._id)}
+                                    >
+                                        delete</i>
                                 }
                             </h5>
 
@@ -180,7 +208,17 @@ const Home=() => {
                                 {
                                     post.comments.map(record => {
                                         return (
-                                            <h6 key={record._id}><span style={{fontWeight: "500"}}>{record.postedBy.name}</span> {record.comment}</h6>
+                                            <div>
+                                                {
+                                                    record.postedBy._id===state._id
+                                                    &&
+                                                    <i className="material-icons" style={{float: "right"}}
+                                                        onClick={() => deleteComment(post._id, record._id)}
+                                                    >
+                                                        delete</i>
+                                                }
+                                                <h6 key={record._id}><span style={{fontWeight: "500"}}>{record.postedBy.name}</span> {record.comment}</h6>
+                                            </div>
                                         )
                                     })
                                 }

@@ -110,7 +110,7 @@ router.put('/unlike', requireLogin, (req, res) => {
 router.put('/comment', requireLogin, (req, res) => {
 
     //get the comment from front end
-    const comment= {
+    const comment={
         comment: req.body.comment,
         postedBy: req.user._id
     }
@@ -121,7 +121,7 @@ router.put('/comment', requireLogin, (req, res) => {
     }, {
         //To get new updated record from mongo
         new: true
-        
+
     })
         //Populate to get more data about the user.
         .populate("comments.postedBy", "_id name")
@@ -139,22 +139,48 @@ router.put('/comment', requireLogin, (req, res) => {
 })
 
 //Delete a post from DB
-router.delete('/deletePost/:id',requireLogin,(req,res)=>{
-    Post.findOne({_id:req.params.id})
-    .populate("postedBy","_id")
-    .exec((err,post)=>{
-        if(err || !post){
-            return res.status(422).json({error:err})
+router.delete('/deletePost/:id', requireLogin, (req, res) => {
+    Post.findOne({_id: req.params.id})
+        .populate("postedBy", "_id")
+        .exec((err, post) => {
+            if (err||!post) {
+                return res.status(422).json({error: err})
+            }
+            if (post.postedBy._id.toString()===req.user._id.toString()) {
+                post.remove()
+                    .then(result => {
+                        res.json(result)
+                    }).catch(err => {
+                        console.log(err)
+                    })
+            }
+        })
+})
+
+//Delete a comment from DB
+router.delete('/deleteComment/:id/:comment_id', requireLogin, (req, res) => {
+
+    //create a commnt using the params 
+    const comment={_id: req.params.comment_id}
+
+    Post.findByIdAndUpdate(req.params.id, {
+        $pull: {comments: comment}
+    },
+        {
+            new: true,
         }
-        if(post.postedBy._id.toString() === req.user._id.toString()){
-              post.remove()
-              .then(result=>{
-                  res.json(result)
-              }).catch(err=>{
-                  console.log(err)
-              })
-        }
-    })
+    )
+        .populate("comments.postedBy", "_id name")
+        .populate("postedBy", "_id name")
+        .exec((error, postComment) => {
+            if (error||!postComment) {
+                return res.status(422).json({error})
+            }
+            else {
+                const result=postComment
+                res.json(result)
+            }
+        })
 })
 
 module.exports=router
