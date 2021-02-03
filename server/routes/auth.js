@@ -69,9 +69,9 @@ router.post('/signin', (req,res) => {
                 //create token based on user ID
                 const token = jwt.sign({_id:savedUser._id}, JWT_SECRET)
                 //de-structuring user to send necessary data back to client.
-                const {_id, name, email} = savedUser
+                const {_id, name, email, followers, following} = savedUser
                 //sending data back
-                res.json({token, user: {_id, name, email}})
+                res.json({token, user: {_id, name, email, followers, following}})
 
             }
             else {

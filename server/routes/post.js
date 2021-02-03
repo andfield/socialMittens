@@ -49,6 +49,21 @@ router.get('/allpost', requireLogin, (req, res) => {
         })
 })
 
+//Get following posts
+router.get('/getfollowpost', requireLogin, (req, res) => {
+    //find if postedBy is present in the following list
+    Post.find({postedBy: {$in: req.user.following}})
+        //Populate the postedBy with user name and Id.
+        .populate("postedBy", '_id name')
+        .populate("comments.postedBy", "_id name")
+        .then(posts => {
+            return res.json({posts})
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 //Get post created by a single user
 router.get('/mypost', requireLogin, (req, res) => {
     //Get all the post posted by the current loggedin user
