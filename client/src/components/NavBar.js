@@ -10,6 +10,7 @@ const NavBar=() => {
   const renderList=() => {
     if (state) {
       return [
+        <li><Link to="/followingPosts">Gallery</Link></li>,
         <li><Link to="/profile">Profile</Link></li>,
         <li><Link to="/create">Create Post</Link></li>,
         <li>
