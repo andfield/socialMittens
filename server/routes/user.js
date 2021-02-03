@@ -48,6 +48,7 @@ router.put('/follow', requireLogin, (req, res) => {
                         new: true
                     }
                 )
+                    .select("-password")
                     .then(result => {
                         res.json(result)
                     })
@@ -60,8 +61,8 @@ router.put('/follow', requireLogin, (req, res) => {
 })
 
 //UnFollow users.
-router.put('/follow', requireLogin, (req, res) => {
-    User.findByIdAndUpdate(req.body.followId, {
+router.put('/unfollow', requireLogin, (req, res) => {
+    User.findByIdAndUpdate(req.body.unfollowId, {
         $pull: {followers: req.user._id}
     },
         {
@@ -79,6 +80,7 @@ router.put('/follow', requireLogin, (req, res) => {
                         new: true
                     }
                 )
+                    .select("-password")
                     .then(result => {
                         res.json(result)
                     })

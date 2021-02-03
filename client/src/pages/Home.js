@@ -134,10 +134,10 @@ const Home=() => {
             .then(result => {
                 console.log(result)
                 const newData=posts.filter(post => {
-                    if(post._id == result._id){
+                    if (post._id==result._id) {
                         return result
                     }
-                    else{
+                    else {
                         return post
                     }
                 })
@@ -150,22 +150,22 @@ const Home=() => {
         fetch(`deleteComment/${postId}/${commentId}`, {
             method: "delete",
             headers: {
-                Authorization: "Bearer "+ localStorage.getItem("jwt")
+                Authorization: "Bearer "+localStorage.getItem("jwt")
             }
         })
-        .then(res => res.json())
-        .then(result => {
-            console.log(result)
-            const newData = posts.filter(post => {
-                if(post._id === result._id){
-                    return result
-                }
-                else{
-                    return post
-                }
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                const newData=posts.filter(post => {
+                    if (post._id===result._id) {
+                        return result
+                    }
+                    else {
+                        return post
+                    }
+                })
+                setPosts(newData)
             })
-            setPosts(newData)
-        })
     }
 
     return (
@@ -175,7 +175,7 @@ const Home=() => {
                 posts.map(post => {
                     return (
                         <div className="card home-card" key={post._id}>
-                            <h5><Link to={post.postedBy._id==state._id?`/profile/${post.postedBy._id}`:'/profile'}>{post.postedBy.name} </Link>
+                            <h5><Link to={post.postedBy._id==state._id? '/profile':`/profile/${post.postedBy._id}`}>{post.postedBy.name} </Link>
                                 {
                                     //expression to check weather the id of current user matches the post id.
                                     post.postedBy._id==state._id

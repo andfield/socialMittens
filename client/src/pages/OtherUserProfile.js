@@ -4,11 +4,17 @@ import {useParams} from 'react-router-dom'
 
 const OtherUserProfile=() => {
 
+    //use the context
+    const {state, dispatch}=useContext(UserContext)
+
     //state to save all user posts
     const [userProfile, setUserProfile]=useState()
 
     //save user id from params.
     const {userId}=useParams()
+
+    //Current user follow status
+    const [following, setFollowing]=useState(false)
 
     // on render get all user posts
     useEffect(() => {
@@ -21,10 +27,76 @@ const OtherUserProfile=() => {
         })
             .then(res => res.json())
             .then(data => {
+
                 setUserProfile(data)
             })
 
     }, [])
+
+    //Function to follow user.
+    const followUser=() => {
+        fetch('/follow', {
+            method: 'put',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+localStorage.getItem('jwt')
+            },
+            body: JSON.stringify({
+                followId: userId
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                //dispatch followers and following to Context
+                dispatch({type: "UPDATE", payload: {following: data.following, followers: data.followers}})
+                localStorage.setItem("user", JSON.stringify(data))
+                setUserProfile((prevState) => {
+                    return {
+                        ...prevState,
+                        user: {
+                            ...prevState.user,
+                            followers: [...prevState.user.followers, data._id]
+                        }
+                    }
+                })
+                setFollowing(true)
+            })
+    }
+
+    //Function to Unfollow user.
+    const unfollowUser=() => {
+        fetch('/unfollow', {
+            method: 'put',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+localStorage.getItem('jwt')
+            },
+            body: JSON.stringify({
+                unfollowId: userId
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                //dispatch followers and following to Context
+                dispatch({type: "UPDATE", payload: {following: data.following, followers: data.followers}})
+                localStorage.setItem("user", JSON.stringify(data))
+                setUserProfile((prevState) => {
+                    const newfollowers=prevState.user.followers.filter(item => item!==data._id)
+                    return {
+                        ...prevState,
+                        user: {
+                            ...prevState.user,
+                            followers: newfollowers
+                        }
+                    }
+                })
+                setFollowing(false)
+            })
+
+    }
+
 
     return (
 
@@ -55,9 +127,19 @@ const OtherUserProfile=() => {
                             </h4>
                             <div style={{display: 'flex', justifyContent: 'space-between', width: '108%'}}>
                                 <h6>{userProfile.posts.length} posts</h6>
-                                <h6>10 Followers</h6>
-                                <h6>10 Following</h6>
+                                <h6>{userProfile.user.followers.length} Followers</h6>
+                                <h6>{userProfile.user.following.length} Following</h6>
                             </div>
+                            {following? <button class="btn waves-effect waves-light #F2BAC9 pink lighten-3" style={{margin: '10px'}}
+                                onClick={() => unfollowUser()} >
+                                Unfollow
+                            </button>
+                                :
+                                <button class="btn waves-effect waves-light #F2BAC9 pink lighten-3" style={{margin: '10px'}}
+                                    onClick={() => followUser()} >
+                                    Follow
+                            </button>}
+
                         </div>
                     </div>
 
