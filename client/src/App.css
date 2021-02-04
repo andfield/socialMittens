@@ -6,6 +6,11 @@ a{
 
 .brand-logo, h4{
   font-family: 'Potta One', cursive;
+  margin: 0 10px;
+
+}
+.sidenav-trigger {
+  margin: 0, 10px;
 }
 .mycard{
   margin-top: 30px;

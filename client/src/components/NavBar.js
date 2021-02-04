@@ -37,8 +37,14 @@ const NavBar=() => {
   return (
     <nav>
       <div className="nav-wrapper #F4F39A yellow lighten-3">
+        <div>
+        <a data-target="side-nav" className="sidenav-trigger left"><i class="material-icons">menu</i></a>
         <Link to={state? "/":"/login"} className="brand-logo left">Social Mittens</Link>
+        </div>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
+          {renderList()}
+        </ul>
+        <ul id="side-nav" className="sidenav">
           {renderList()}
         </ul>
       </div>
