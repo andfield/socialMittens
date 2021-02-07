@@ -1,29 +1,25 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
+import M from 'materialize-css'
 
 const NavBar=() => {
 
   const {state, dispatch}=useContext(UserContext)
-  const history = useHistory()
+  const history=useHistory()
+
+  useEffect(() => {
+    let elems=document.querySelectorAll('.dropdown-trigger')
+    M.Dropdown.init(elems, {inDuration: 300, outDuration: 225, coverTrigger: false})
+
+  })
 
   const renderList=() => {
     if (state) {
       return [
-        <li><Link to="/followingPosts">Explore</Link></li>,
-        <li><Link to="/profile">Profile</Link></li>,
-        <li><Link to="/create">Create Post</Link></li>,
-        <li>
-          <button className="btn waves-effect waves-light #F2BAC9 pink lighten-3"
-            onClick={() => {
-              localStorage.clear()
-              dispatch({type: "LOGOUT"})
-              history.push('/login')
-            }}
-            >
-            Logout
-            </button>
-        </li>
+        <li><Link to="/followingPosts"><i className="large material-icons btn-icons">explore</i></Link></li>,
+        <li><Link to="/create"><i className="material-icons btn-icons">add_circle</i></Link></li>,
+        <li><a className="dropdown-trigger" data-target="dropdown1"><i className="material-icons">account_circle</i></a></li>
       ]
     }
     else {
@@ -37,15 +33,21 @@ const NavBar=() => {
   return (
     <nav>
       <div className="nav-wrapper #F4F39A yellow lighten-3">
-        <div>
-        <a data-target="side-nav" className="sidenav-trigger left"><i class="material-icons">menu</i></a>
-        <Link to={state? "/":"/login"} className="brand-logo left">Social Mittens</Link>
-        </div>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
+
+        <Link to={state? "/":"/login"} style={{marginLeft: '350px'}} className="brand-logo left">Social Mittens</Link>
+
+        <ul id="nav-mobile" className="btn-group right">
           {renderList()}
         </ul>
-        <ul id="side-nav" className="sidenav">
-          {renderList()}
+        <ul id="dropdown1" className="dropdown-content">
+          <li><Link to="/profile"><i className="material-icons">account_circle</i>My Account</Link></li>
+          <li><Link to="/setting"><i className="material-icons">settings</i>Settings</Link></li>
+          <li class="divider" tabindex="-1"></li>
+          <li><a onClick={() => {
+            localStorage.clear()
+            dispatch({type: "LOGOUT"})
+            history.push('/login')
+          }}><i className="material-icons">cancel</i>Logout</a></li>
         </ul>
       </div>
     </nav>
