@@ -11,6 +11,7 @@ const SignUp=() => {
     const [name, setName]=useState("")
     const [password, setPassword]=useState("")
     const [email, setEmail]=useState("")
+    const [showPassword, setShow]=useState("password")
 
     //Function to post data using fetch
     const PostData=() => {
@@ -44,19 +45,38 @@ const SignUp=() => {
             })
     }
 
+    //Function to show the password
+    const show=() => {
+        var checkBox=document.getElementById("checkbox")
+
+        if (checkBox.checked==true) {
+            setShow("text")
+        }
+        else {
+            setShow("password")
+        }
+    }
 
     return (
         <div className="mycard" >
             <div class="card auth-card input-field">
-                <h4>Social Mittens</h4>
+                <h4 style={{padding: '30px'}}>Social Mittens</h4>
                 <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
                 <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                <button class="btn waves-effect waves-light #F2BAC9 pink lighten-3" onClick={() => PostData()} >Sign Up
+                <input type={showPassword} placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                <p>
+                    <label>
+                        <input type="checkbox" id="checkbox" onClick={show} />
+                        <span>Show password</span>
+                    </label>
+                </p>
+                <button style={{marginTop: '20px'}} class="btn waves-effect waves-light #F2BAC9 pink lighten-3" onClick={() => PostData()} >Sign Up
                 </button>
-                <h5>
-                    <Link to="/signin">Do you already have an account?</Link>
-                </h5>
+            </div>
+            <div className="card auth-card">
+                <h7>
+                    <Link to="/login">You already have an account?</Link>
+                </h7>
             </div>
         </div>
     )

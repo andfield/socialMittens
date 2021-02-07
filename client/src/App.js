@@ -47,13 +47,13 @@ const AppRouting=() => {
 
   return (
     <Switch>
-      <Route path="/" exact component={Home}></Route>
+      <Route path="/" exact component={FollowingPosts}></Route>
       <Route path="/profile" exact component={Profile}></Route>
       <Route path="/signup" component={SignUP}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/create" component={CreatePost}></Route>
       <Route path="/profile/:userId" component={OtherUserProfile}></Route>
-      <Route path="/followingPosts"component={FollowingPosts}></Route>
+      <Route path="/followingPosts"component={Home}></Route>
     </Switch>
   )
 }

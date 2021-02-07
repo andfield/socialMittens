@@ -19,7 +19,7 @@ const OtherUserProfile=() => {
     // on render get all user posts
     useEffect(() => {
 
-        //fetch request to server to get all user posts
+        //fetch request to server to get all user posts and save them to local state .
         fetch(`/user/${userId}`, {
             headers: {
                 "Authorization": "Bearer "+localStorage.getItem('jwt')
@@ -27,7 +27,6 @@ const OtherUserProfile=() => {
         })
             .then(res => res.json())
             .then(data => {
-
                 setUserProfile(data)
             })
 

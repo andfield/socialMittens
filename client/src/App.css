@@ -4,6 +4,10 @@ a{
   color: black !important;
 }
 
+h7 {
+  text-shadow:  1px 1px 8px #000000;
+}
+
 .brand-logo, h4{
   font-family: 'Potta One', cursive;
   margin: 0 10px;

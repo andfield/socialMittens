@@ -172,6 +172,22 @@ const FollowingPosts=() => {
         // Main div
         <div className="home">
             {
+                posts.length===0&&
+                <div className="mycard">
+                    <div className="card auth-card">
+                        <h4 style={{textAlign: 'center'}}>Looks like you are lonely.</h4>
+                        <h6 style={{textAlign: "center", padding: '20px'}}>Try Following someone first or look at random posts</h6>
+                        <a className="btn waves-effect waves-light #F2BAC9 pink lighten-3"
+                            style={{}}
+                        >
+                            <Link to="/followingPosts">Explore</Link>
+                        </a>
+                    </div>
+                </div>
+
+            }
+
+            {
                 posts.map(post => {
                     return (
                         <div className="card home-card" key={post._id}>

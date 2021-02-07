@@ -6,7 +6,7 @@ import {UserContext} from '../App'
 const Login=() => {
 
     //destructure the UserContext and get state and dispatch from it.
-    const{state, dispatch} = useContext(UserContext)
+    const {state, dispatch}=useContext(UserContext)
 
     //initiallizing use History
     const history=useHistory()
@@ -14,6 +14,7 @@ const Login=() => {
     //Create States
     const [password, setPassword]=useState("")
     const [email, setEmail]=useState("")
+    const [showPassword, setShow]=useState("password")
 
     //Function to post data using fetch
     const PostData=() => {
@@ -57,18 +58,45 @@ const Login=() => {
             })
     }
 
+    //Function to show the password
+
+    const show=() => {
+        var checkBox=document.getElementById("checkbox")
+
+        if (checkBox.checked==true) {
+            setShow("text")
+        }
+        else{
+            setShow("password")
+        }
+    }
+
+
+
     return (
         <div className="mycard" >
-            <div class="card auth-card input-field">
-                <h4>Social Mittens</h4>
-                <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            <div className="card auth-card input-field">
+                <h4 style={{padding: '30px'}}>Social Mittens</h4>
+                <input style={{}} type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
 
-                <button class="btn waves-effect waves-light #F2BAC9 pink lighten-3" onClick={() => PostData()}>Login
+
+                <input type={showPassword} placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                <p>
+                    <label>
+                        <input type="checkbox" id="checkbox" onClick={show} />
+                        <span>Show password</span>
+                    </label>
+                </p>
+
+
+                <button style={{marginTop: '20px'}} className="btn waves-effect waves-light #F2BAC9 pink lighten-3" onClick={() => PostData()}>Login
                 </button>
-                <h5>
-                    <Link to="/signin">You dont have an account?</Link>
-                </h5>
+            </div>
+
+            <div className="card auth-card">
+                <h7>
+                    <Link to="/signup">You dont have an account?</Link>
+                </h7>
             </div>
         </div>
     )
