@@ -29,7 +29,7 @@ const AppRouting=() => {
     //get user from local storage
     const user=JSON.parse(localStorage.getItem("user"))
 
-
+    
 
     //if user is   in local storage save him to context else to login
     if (user) {
@@ -53,7 +53,7 @@ const AppRouting=() => {
       <Route path="/login" component={Login}></Route>
       <Route path="/create" component={CreatePost}></Route>
       <Route path="/profile/:userId" component={OtherUserProfile}></Route>
-      <Route path="/followingPosts"component={Home}></Route>
+      <Route path="/explore" component={Home}></Route>
     </Switch>
   )
 }

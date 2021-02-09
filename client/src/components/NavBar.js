@@ -9,17 +9,17 @@ const NavBar=() => {
   const history=useHistory()
 
   useEffect(() => {
-    let elems=document.querySelectorAll('.dropdown-trigger')
+    var elems=document.querySelectorAll('#dropdowner')
     M.Dropdown.init(elems, {inDuration: 300, outDuration: 225, coverTrigger: false})
-
   })
+
 
   const renderList=() => {
     if (state) {
       return [
-        <li><Link to="/followingPosts"><i className="large material-icons btn-icons">explore</i></Link></li>,
+        <li><Link to="/explore"><i className="large material-icons btn-icons">explore</i></Link></li>,
         <li><Link to="/create"><i className="material-icons btn-icons">add_circle</i></Link></li>,
-        <li><a className="dropdown-trigger" data-target="dropdown1"><i className="material-icons">account_circle</i></a></li>
+        <li><a id="dropdowner" className="dropdown-trigger" data-target="dropdown1"><i className="material-icons">account_circle</i></a></li>
       ]
     }
     else {
@@ -34,7 +34,7 @@ const NavBar=() => {
     <nav>
       <div className="nav-wrapper #F4F39A yellow lighten-3">
 
-        <Link to={state? "/":"/login"} style={{marginLeft: '350px'}} className="brand-logo left">Social Mittens</Link>
+        <Link to={state? "/":"/login"} className="brand-logo left">Social Mittens</Link>
 
         <ul id="nav-mobile" className="btn-group right">
           {renderList()}

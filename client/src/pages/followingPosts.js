@@ -27,7 +27,7 @@ const FollowingPosts=() => {
             .catch(error => {
                 console.log(error)
             })
-    }, [posts])
+    }, [])
 
     //Create a function to like a post.
     const likePost=(id) => {

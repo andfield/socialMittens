@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema({
     following: [{
         type: ObjectId,
         ref: "User"
-    }]
+    }],
+
+    profilePicture: {
+        type: String,
+        default: 'https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png'
+    }
 
 })
 

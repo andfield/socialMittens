@@ -7,7 +7,7 @@ const Home=() => {
 
     //Post state
     const [posts, setPosts]=useState([])
-
+    const [postChange, setPostChange]=useState(false)
     //Using context to get user
     const {state, dispatch}=useContext(UserContext)
 
@@ -27,7 +27,7 @@ const Home=() => {
             .catch(error => {
                 console.log(error)
             })
-    }, [posts])
+    }, [postChange])
 
     //Create a function to like a post.
     const likePost=(id) => {
@@ -55,6 +55,7 @@ const Home=() => {
                     }
                 })
                 setPosts(newPosts)
+                setPostChange(!postChange)
             })
             .catch(error => {
                 console.log(error)
@@ -87,6 +88,7 @@ const Home=() => {
                     }
                 })
                 setPosts(newPosts)
+                setPostChange(!postChange)
             })
             .catch(error => {
                 console.log(error)
@@ -117,6 +119,8 @@ const Home=() => {
                     }
                 })
                 setPosts(newPosts)
+                setPostChange(!postChange)          
+                document.getElementById('comment').value = ''
             }).catch(error => {
                 console.log(error)
             })
@@ -142,6 +146,7 @@ const Home=() => {
                     }
                 })
                 setPosts(newData)
+                setPostChange(!postChange)
             })
     }
 
@@ -165,6 +170,7 @@ const Home=() => {
                     }
                 })
                 setPosts(newData)
+                setPostChange(!postChange)
             })
     }
 
@@ -227,7 +233,7 @@ const Home=() => {
                                     event.preventDefault()
                                     addComment(event.target[0].value, post._id)
                                 }}>
-                                    <input type="text" placeholder="Add a comment" />
+                                    <input type="text" id="comment" placeholder="Add a comment" />
                                 </form>
                             </div>
                         </div>

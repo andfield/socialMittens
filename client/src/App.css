@@ -10,12 +10,15 @@ h7 {
 
 .brand-logo, h4{
   font-family: 'Potta One', cursive;
-  margin: 0;
-
 }
-
-.btn-group {
-  margin-right: 350px
+/* For TV */
+@media screen and (min-width: 1201px) {
+  .brand-logo {
+    margin-left: 100px;
+  }
+  .btn-group {
+    margin-right: 100px
+  }
 }
 
 .dropdown-content {

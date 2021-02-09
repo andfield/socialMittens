@@ -13,8 +13,8 @@ const OtherUserProfile=() => {
     //save user id from params.
     const {userId}=useParams()
 
-    //Current user follow status
-    const [following, setFollowing]=useState(false)
+    //Current user follow status if user id 
+    const [following, setFollowing]=useState(state? state.following.includes(userId):false)
 
     // on render get all user posts
     useEffect(() => {
@@ -27,6 +27,7 @@ const OtherUserProfile=() => {
         })
             .then(res => res.json())
             .then(data => {
+                
                 setUserProfile(data)
             })
 
@@ -113,7 +114,7 @@ const OtherUserProfile=() => {
                         {/* Image div */}
                         <div>
                             <img style={{width: "160px", height: "160px", borderRadius: "80px"}}
-                                src="https://images.unsplash.com/photo-1558624232-75ee22af7e67?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
+                                src={state? userProfile.user.profilePicture:"Loading..."}
                             />
                         </div>
                         {/* User details */}
