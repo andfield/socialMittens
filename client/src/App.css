@@ -8,9 +8,25 @@ h7 {
   text-shadow:  1px 1px 8px #000000;
 }
 
-.brand-logo, h4{
+h4 {
   font-family: 'Potta One', cursive;
 }
+
+.brand-logo{
+  font-family: 'Potta One', cursive;
+}
+
+
+/* For Mobile */
+@media screen and (min-width: 60px) and (max-width: 480px) {
+nav ul a{
+  padding: 0 5px  !important;
+}
+nav .brand-logo.left{
+  font-size: 20px;
+}
+}
+
 /* For TV */
 @media screen and (min-width: 1201px) {
   .brand-logo {

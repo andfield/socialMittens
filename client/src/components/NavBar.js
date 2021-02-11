@@ -17,9 +17,9 @@ const NavBar=() => {
   const renderList=() => {
     if (state) {
       return [
-        <li><Link to="/explore"><i className="large material-icons btn-icons">explore</i></Link></li>,
+        <li><Link to="/explore"><i className="material-icons btn-icons">explore</i></Link></li>,
         <li><Link to="/create"><i className="material-icons btn-icons">add_circle</i></Link></li>,
-        <li><a id="dropdowner" className="dropdown-trigger" data-target="dropdown1"><i className="material-icons">account_circle</i></a></li>
+        <li><a id="dropdowner" className="dropdown-trigger btn-icons" data-target="dropdown1"><i className="material-icons">account_circle</i></a></li>
       ]
     }
     else {
@@ -34,11 +34,12 @@ const NavBar=() => {
     <nav>
       <div className="nav-wrapper #F4F39A yellow lighten-3">
 
-        <Link to={state? "/":"/login"} className="brand-logo left">Social Mittens</Link>
+        <Link to={state? "/":"/login"} className="brand-logo left logo">Social Mittens</Link>
 
         <ul id="nav-mobile" className="btn-group right">
           {renderList()}
         </ul>
+
         <ul id="dropdown1" className="dropdown-content">
           <li><Link to="/profile"><i className="material-icons">account_circle</i>My Account</Link></li>
           <li><Link to="/setting"><i className="material-icons">settings</i>Settings</Link></li>
