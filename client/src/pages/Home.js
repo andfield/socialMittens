@@ -8,6 +8,7 @@ const Home=() => {
     //Post state
     const [posts, setPosts]=useState([])
     const [postChange, setPostChange]=useState(false)
+    
     //Using context to get user
     const {state, dispatch}=useContext(UserContext)
 
