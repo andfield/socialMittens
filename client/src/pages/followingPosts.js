@@ -115,6 +115,7 @@ const FollowingPosts = () => {
         });
         setPosts(newPosts);
         setPostChange(!postChange)
+        document.getElementById("comment").value = ""
       })
       .catch((error) => {
         console.log(error);
@@ -274,7 +275,7 @@ const FollowingPosts = () => {
                   addComment(event.target[0].value, post._id);
                 }}
               >
-                <input type="text" placeholder="Add a comment" />
+                <input type="text" id="comment" placeholder="Add a comment" />
               </form>
             </div>
           </div>

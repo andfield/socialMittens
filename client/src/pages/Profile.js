@@ -49,8 +49,8 @@ const Profile=() => {
                     <h5>{state?state.email: "loading email"}</h5>
                     <div style={{display: 'flex', justifyContent: 'space-between', width: '108%'}}>
                         <h6>{myposts.length} Post</h6>
-                        <h6>{state ? state.followers.length : 0} followers</h6>
-                        <h6>{ state ? state.following.length : 0} following</h6>
+                        <h6>{state ? state.followers.length : "0"} followers</h6>
+                        <h6>{ state ? state.following.length : "0"} following</h6>
                     </div>
                 </div>
             </div>

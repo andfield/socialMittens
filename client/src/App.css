@@ -37,6 +37,10 @@ nav .brand-logo.left{
   }
 }
 
+.card-image img{
+  max-height: 450px;
+}
+
 .dropdown-content {
   min-width: 180px;
 }
