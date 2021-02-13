@@ -12,7 +12,7 @@ const SignUp=() => {
     const [password, setPassword]=useState("")
     const [email, setEmail]=useState("")
     const [showPassword, setShow]=useState("password")
-    const [image, setImage]=useState("")
+    const [image, setImage]=useState(undefined)
     const [url, setImgURL]=useState(undefined)
 
     useEffect(() => {
@@ -110,18 +110,17 @@ const SignUp=() => {
                 <h4 style={{padding: '30px'}}>Social Mittens</h4>
                 <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
                 <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-
+                <input type={showPassword} placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                
                 {/* File input */}
-                <div className="file-field input-field">
-                    <div className="btn white">
-                        <i class="material-icons" style={{color: 'black'}} >attach_file</i>
-                        <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-                    </div>
-                    <div className="file-path-wrapper">
-                        <input className="file-path validate" type="text" placeholder="Profile Picture" />
+                <div className="row file-field" style={{width: '101%'}}>
+                    <div className="col s12 waves-effect waves-red btn-flat">
+                        {
+                            image ? <span>File Selected</span> : <span>Select Profile Picture</span>
+                        }
+                        <input id="upload" type="file" onChange={(event) => setImage(event.target.files[0])} />
                     </div>
                 </div>
-                <input type={showPassword} placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
                 <p>
                     <label>
                         <input type="checkbox" id="checkbox" onClick={show} />

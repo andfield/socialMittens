@@ -8,7 +8,7 @@ const Home=() => {
     //Post state
     const [posts, setPosts]=useState([])
     const [postChange, setPostChange]=useState(false)
-    
+
     //Using context to get user
     const {state, dispatch}=useContext(UserContext)
 
@@ -120,8 +120,8 @@ const Home=() => {
                     }
                 })
                 setPosts(newPosts)
-                setPostChange(!postChange)          
-                document.getElementById('comment').value = ''
+                setPostChange(!postChange)
+                document.getElementById('comment').value=''
             }).catch(error => {
                 console.log(error)
             })
@@ -177,7 +177,7 @@ const Home=() => {
 
     return (
         // Main div
-        <div className="home">
+        <div className="home container">
             {
                 posts.map(post => {
                     return (
@@ -230,11 +230,14 @@ const Home=() => {
                                         )
                                     })
                                 }
-                                <form onSubmit={(event) => {
-                                    event.preventDefault()
-                                    addComment(event.target[0].value, post._id)
-                                }}>
+                                <form
+                                    onSubmit={(event) => {
+                                        event.preventDefault()
+                                        addComment(event.target[0].value, post._id)
+                                    }}>
+
                                     <input type="text" id="comment" placeholder="Add a comment" />
+
                                 </form>
                             </div>
                         </div>

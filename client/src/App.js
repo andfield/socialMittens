@@ -10,6 +10,7 @@ import CreatePost from './pages/CreatePost'
 import OtherUserProfile from './pages/OtherUserProfile'
 import FollowingPosts from './pages/followingPosts'
 import {reducer, initialState} from './reducers/userReducer'
+import Settings from './pages/Settings'
 
 
 //Create a context [ type of global state ] and export it
@@ -54,6 +55,7 @@ const AppRouting=() => {
       <Route path="/create" component={CreatePost}></Route>
       <Route path="/profile/:userId" component={OtherUserProfile}></Route>
       <Route path="/explore" component={Home}></Route>
+      <Route path="/settings" component={Settings}></Route>
     </Switch>
   )
 }

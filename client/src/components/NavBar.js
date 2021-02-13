@@ -42,7 +42,7 @@ const NavBar=() => {
 
         <ul id="dropdown1" className="dropdown-content">
           <li><Link to="/profile"><i className="material-icons">account_circle</i>My Account</Link></li>
-          <li><Link to="/setting"><i className="material-icons">settings</i>Settings</Link></li>
+          <li><Link to="/settings"><i className="material-icons">settings</i>Settings</Link></li>
           <li class="divider" tabindex="-1"></li>
           <li><a onClick={() => {
             localStorage.clear()
