@@ -72,22 +72,43 @@ router.put('/unfollow', requireLogin, (req, res) => {
             if (error) {
                 return res.status(422).json({error})
             }
-                User.findByIdAndUpdate(req.user._id, {
-                    $pull: {following: req.body.unfollowId}
-                },
-                    {
-                        new: true
-                    }
-                )
-                    .select("-password")
-                    .then(result => {
-                        res.json(result)
-                    })
-                    .catch(error => {
-                        res.status(422).json({error})
-                    })
-            }
+            User.findByIdAndUpdate(req.user._id, {
+                $pull: {following: req.body.unfollowId}
+            },
+                {
+                    new: true
+                }
+            )
+                .select("-password")
+                .then(result => {
+                    res.json(result)
+                })
+                .catch(error => {
+                    res.status(422).json({error})
+                })
+        }
     )
+})
+
+//Update proflie picture
+
+router.put('/updatepic', requireLogin, (req, res) => {
+
+    User.findByIdAndUpdate(req.user._id,
+
+        //set new picture
+        {
+            $set: {profilePicture: req.body.pic}
+        },
+        {new: true},
+        (error, result) => {
+            if (error) {
+                return res.status(422).json({error: 'Failed to update picture'})
+            }
+            res.json(result)
+        }
+    )
+
 })
 
 

@@ -11,10 +11,11 @@ const Settings=() => {
     const [name, setName]=useState("")
     const [email, setEmail]=useState("")
     const [image, setImage]=useState(undefined)
-    const [url, setImgURL]=useState(undefined)
 
     //Function to handle MenuButton Click
 
+
+    //Effect to upload the updated pic on cloudinary, context state and DB.
     useEffect(() => {
         if (image) {
             //use formdata because the image is a file
@@ -33,15 +34,29 @@ const Settings=() => {
                 .then(res => res.json())
                 //once the data is converted to json set the url state to url given by cloudinary
                 .then(data => {
-                    setImgURL(data.url)
-                    //push the new image to localstorage
-                    localStorage.setItem("user", JSON.stringify({...state, profilePicture: data.url}))
 
-                    //update the state.
-                    dispatch({type: 'UPDATEPICTURE', payload: data.url})
+                    //Network request to update DB.
+                    fetch('/updatepic', {
+                        method: 'put',
+                        headers: {
+                            "Content-Type": 'application/json',
+                            "Authorization": "Bearer "+localStorage.getItem('jwt')
+                        },
+                        body: JSON.stringify({
+                            pic: data.url
+                        })
+                    }).then(res => res.json())
+                        .then(result => {
+
+                            //push the new image to localstorage
+                            localStorage.setItem("user", JSON.stringify({...state, profilePicture: result.profilePicture}))
+
+                            //update the state.
+                            dispatch({type: 'UPDATEPICTURE', payload: result.profilePicture})
+                        })
 
                     //Reload the page to update state.
-                    window.location.reload()
+                    // window.location.reload()
                 })
                 .catch(error => {
                     console.log(error)
@@ -49,7 +64,7 @@ const Settings=() => {
         }
     }, [image])
 
-    //Function to update Photo
+    //Function to update Photo on local state
     const updatePhoto=(file) => {
         setImage(file)
     }
