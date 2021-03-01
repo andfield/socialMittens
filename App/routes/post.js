@@ -42,6 +42,8 @@ router.get('/allpost', requireLogin, (req, res) => {
         .populate("postedBy", '_id name')
         .populate("comments.postedBy", "_id name")
         .then(posts => {
+
+            
             return res.json({posts})
         })
         .catch(error => {
