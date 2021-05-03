@@ -109,22 +109,22 @@ const SignUp=() => {
 
         <Container>
             <SignUpContainer>
-                <h4>Social Mittens</h4>
-
+                <Title>Social Mittens</Title>
                 <BtnContainer>
-                    <input type="text" className="input" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
-                    <input type={showPassword} className="input" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                    <Input type="email" className="input" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                    <Input type="text" className="input" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
+                    <Input type={showPassword} className="input" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
                     <div className="row file-field" style={{width: '101%'}}>
-                            {
-                                image? <span>File Selected</span>:<span>Select Profile Picture</span>
-                            }
-                            <input id="upload" type="file" onChange={(event) => setImage(event.target.files[0])} />
+                        {
+                            image? <FilePicker>Change selection</FilePicker>:<FilePicker >Select Profile Picture</FilePicker>
+                        }
+                        <Input id="upload" type="file" onChange={(event) => setImage(event.target.files[0])} />
 
                     </div>
-                    <p>
+                    <p style={{marginTop: "-10px"}}>
                         <label>
-                            <input type="checkbox" id="checkbox" onClick={show} />
-                            <span>Show password</span>
+                            <Input type="checkbox" id="checkbox" onClick={show} />
+                            <span style={{color: 'grey'}}>Show password</span>
                         </label>
                     </p>
                     <button style={{marginTop: '20px'}}
@@ -134,21 +134,12 @@ const SignUp=() => {
               </button>
 
                 </BtnContainer>
-                <p>
+                <p style={{color: 'grey', marginTop: '20px'}}>
                     <Link to="/login">You already have an account?</Link>
                 </p>
             </SignUpContainer>
         </Container>
 
-
-
-
-
-        //         {/* Submit button */}
-
-        //     </div>
-
-        // </div>
     )
 }
 
@@ -161,7 +152,7 @@ const Container=styled.div`
 `
 
 const SignUpContainer=styled.div`
-  justify-content: center;
+  padding-top: 10em;
   align-items: center;
   background-color: white;
   display: flex;
@@ -174,4 +165,23 @@ const SignUpContainer=styled.div`
 const BtnContainer=styled.div`
   display: flex; 
   flex-direction: column;
+`
+const Title=styled.h4`
+
+    font-size:2.5em;
+    padding-bottom: 1.5em;
+
+`
+
+const Input=styled.input`
+    &&&{
+        text-indent: 5px;
+    }
+`
+
+const FilePicker=styled.p`
+
+    margin-top: 20px;
+    color: Grey;
+
 `

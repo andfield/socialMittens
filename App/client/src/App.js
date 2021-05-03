@@ -54,9 +54,9 @@ const AppRouting=() => {
   return (
     <>
       {
-        location.pathname == "/login" || "/signup" ? null:<NavBar />
+        location.pathname==='/login'||location.pathname==='/signup'? null:<NavBar />
       }
-       {/* <NavBar /> */}
+      {/* <NavBar /> */}
       <Switch>
         <Route path="/" exact component={FollowingPosts}></Route>
         <Route path="/profile" exact component={Profile}></Route>

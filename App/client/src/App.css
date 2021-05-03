@@ -58,24 +58,6 @@ nav .brand-logo.left{
   margin: 10px auto
 }
 
-
-/* Styling input fields */
-input, textarea, .file-field {
-  /* outline: none!important; */
-  padding: 3px 0px 3px 3px !important;
-  margin: 5px 1px 3px 0px !important;
-  border-radius: 10px;
-  text-indent: 10px;
-}
-
-
-.input:hover {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
-  padding: 3px 0px 3px 3px !important;
-  margin: 5px 1px 3px 0px !important;
-  border: 1px solid rgba(81, 203, 238, 1) !important;
-}
-
 /* Styles for gallery div */
 .gallery{
   display: flex;
@@ -88,10 +70,6 @@ input, textarea, .file-field {
   width: 30%;
 }
 
-/* Styles for home page parent div */
-.home{
-  
-}
 
 /* Styles for Home page card */
 .home-card{
