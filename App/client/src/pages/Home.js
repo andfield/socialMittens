@@ -204,9 +204,9 @@ const Home=() => {
                                 {/* Allow current user to only like a post once */}
                                 {
                                     post.likes.includes(state._id)?
-                                        <i className="material-icons" style={{color: 'red'}} onClick={() => {unlikePost(post._id)}} >thumb_down</i>
+                                        <i className="material-icons" style={{color: 'red'}} onClick={() => {unlikePost(post._id)}} >favorite</i>
                                         :
-                                        <i className="material-icons" style={{color: 'blue'}} onClick={() => {likePost(post._id)}} >thumb_up</i>
+                                        <i className="material-icons" style={{color: 'black'}} onClick={() => {likePost(post._id)}} >favorite_border</i>
                                 }
 
                                 <h6>{post.likes.length} Likes</h6>

@@ -58,35 +58,18 @@ nav .brand-logo.left{
   margin: 10px auto
 }
 
-input[type=file]{
-  background-color: #000000;
-}
 
 /* Styling input fields */
 input, textarea, .file-field {
-  outline: none!important;
+  /* outline: none!important; */
   padding: 3px 0px 3px 3px !important;
   margin: 5px 1px 3px 0px !important;
-  border: 1px solid #868686 !important;
+  border-radius: 10px;
+  text-indent: 10px;
 }
 
-/* Changing the text input color when selected */
-.input-field input:focus {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
-  padding: 3px 0px 3px 3px !important;
-  margin: 5px 1px 3px 0px !important;
-  border: 1px solid rgba(81, 203, 238, 1) !important;
-}
 
-input[type=text] {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
-  padding: 3px 0px 3px 3px !important;
-  margin: 5px 1px 3px 0px !important;
-  border: 1px solid rgba(81, 203, 238, 1) !important;
-}
-
-.file-field:hover {
-
+.input:hover {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
   padding: 3px 0px 3px 3px !important;
   margin: 5px 1px 3px 0px !important;

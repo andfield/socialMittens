@@ -1,7 +1,9 @@
 import React, {useEffect, createContext, useReducer, useContext} from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
-import {BrowserRouter, Route, Switch, useHistory} from 'react-router-dom'
+import {
+  BrowserRouter, Route, Switch, useHistory, useLocation
+} from 'react-router-dom'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import SignUP from './pages/SignUp'
@@ -19,6 +21,10 @@ export const UserContext=createContext()
 //create a seperate component for app routes
 const AppRouting=() => {
 
+
+  //get the current URL.
+  let location=useLocation()
+
   //initiallize useHistory
   const history=useHistory()
 
@@ -27,10 +33,9 @@ const AppRouting=() => {
 
   //use effect to run when the component mounts for first time
   useEffect(() => {
+
     //get user from local storage
     const user=JSON.parse(localStorage.getItem("user"))
-
-    
 
     //if user is   in local storage save him to context else to login
     if (user) {
@@ -47,22 +52,27 @@ const AppRouting=() => {
   }, [])
 
   return (
-    <Switch>
-      <Route path="/" exact component={FollowingPosts}></Route>
-      <Route path="/profile" exact component={Profile}></Route>
-      <Route path="/signup" component={SignUP}></Route>
-      <Route path="/login" component={Login}></Route>
-      <Route path="/create" component={CreatePost}></Route>
-      <Route path="/profile/:userId" component={OtherUserProfile}></Route>
-      <Route path="/explore" component={Home}></Route>
-      <Route path="/settings" component={Settings}></Route>
-    </Switch>
+    <>
+      {
+        location.pathname == "/login" || "/signup" ? null:<NavBar />
+      }
+       {/* <NavBar /> */}
+      <Switch>
+        <Route path="/" exact component={FollowingPosts}></Route>
+        <Route path="/profile" exact component={Profile}></Route>
+        <Route path="/signup" component={SignUP}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/create" component={CreatePost}></Route>
+        <Route path="/profile/:userId" component={OtherUserProfile}></Route>
+        <Route path="/explore" component={Home}></Route>
+        <Route path="/settings" component={Settings}></Route>
+      </Switch>
+    </>
   )
 }
 
 
 function App() {
-
   //initallize userReducer so when the context state changes the components re-render
   const [state, dispatch]=useReducer(reducer, initialState)
 
@@ -71,7 +81,7 @@ function App() {
     //Wrap everything with context so child components have access to state.
     <UserContext.Provider value={{state, dispatch}}>
       <BrowserRouter>
-        <NavBar />
+
         <AppRouting />
       </BrowserRouter>
     </UserContext.Provider>

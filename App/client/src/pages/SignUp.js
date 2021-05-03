@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import M from 'materialize-css'
+import styled from "styled-components"
 
 const SignUp=() => {
 
@@ -105,43 +106,72 @@ const SignUp=() => {
     }
 
     return (
-        <div className="mycard" >
-            <div class="card auth-card input-field">
-                <h4 style={{padding: '30px'}}>Social Mittens</h4>
-                <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
-                <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input type={showPassword} placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                
-                {/* File input */}
-                <div className="row file-field" style={{width: '101%'}}>
-                    <div className="col s12 waves-effect waves-red btn-flat">
-                        {
-                            image ? <span>File Selected</span> : <span>Select Profile Picture</span>
-                        }
-                        <input id="upload" type="file" onChange={(event) => setImage(event.target.files[0])} />
-                    </div>
-                </div>
-                <p>
-                    <label>
-                        <input type="checkbox" id="checkbox" onClick={show} />
-                        <span>Show password</span>
-                    </label>
-                </p>
 
-                {/* Submit button */}
-                <button style={{marginTop: '20px'}}
-                    className="btn waves-effect waves-light #F2BAC9 pink lighten-3"
-                    onClick={() => PostData()} >
-                    Sign Up
-                </button>
-            </div>
-            <div className="card auth-card">
-                <h7>
+        <Container>
+            <SignUpContainer>
+                <h4>Social Mittens</h4>
+
+                <BtnContainer>
+                    <input type="text" className="input" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} />
+                    <input type={showPassword} className="input" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                    <div className="row file-field" style={{width: '101%'}}>
+                            {
+                                image? <span>File Selected</span>:<span>Select Profile Picture</span>
+                            }
+                            <input id="upload" type="file" onChange={(event) => setImage(event.target.files[0])} />
+
+                    </div>
+                    <p>
+                        <label>
+                            <input type="checkbox" id="checkbox" onClick={show} />
+                            <span>Show password</span>
+                        </label>
+                    </p>
+                    <button style={{marginTop: '20px'}}
+                        className="btn waves-effect waves-light #F2BAC9 pink lighten-3"
+                        onClick={() => PostData()} >
+                        Sign Up
+              </button>
+
+                </BtnContainer>
+                <p>
                     <Link to="/login">You already have an account?</Link>
-                </h7>
-            </div>
-        </div>
+                </p>
+            </SignUpContainer>
+        </Container>
+
+
+
+
+
+        //         {/* Submit button */}
+
+        //     </div>
+
+        // </div>
     )
 }
 
 export default SignUp
+
+//Styled components.
+const Container=styled.div`
+  display: grid;
+  height: 100vh;
+`
+
+const SignUpContainer=styled.div`
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+`
+
+const BtnContainer=styled.div`
+  display: flex; 
+  flex-direction: column;
+`
